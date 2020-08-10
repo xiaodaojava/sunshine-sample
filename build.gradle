@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'red.lixiang'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	maven {
+		url 'https://maven.aliyun.com/repository/public'
+	}
+	maven {
+		url 'https://maven.aliyun.com/repository/spring'
+	}
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
+	// 小刀打的工具包依赖(已发布到中央仓库)
+	compile 'red.lixiang.tools:sunshine-starter:1.0.1'
+	// 这里方便测试,引了h2 , 实际中可以换成mysql
+	runtimeOnly 'com.h2database:h2'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
